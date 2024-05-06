@@ -1,0 +1,17 @@
+---
+driver:
+  name: docker
+provisioner:
+  name: ansible
+platforms:
+  - name: galaxy-tool-test
+    image: galaxy/galaxy-min
+    # override default sleep loop, use Dockerfile CMD
+    command: ""
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:rw
+    privileged: true
+    dockerfile: ../_common/Dockerfile.j2
+    pre_build_image: false
+    bootstrap_key: ${BOOTSTRAP_KEY}
+role_name_check: 1

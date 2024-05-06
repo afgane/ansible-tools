@@ -1,0 +1,8 @@
+FROM {{ item.image }}
+
+USER root
+RUN apt update && apt install -y \
+    python3-virtualenv
+USER galaxy
+
+RUN sed -i 's/galaxy:/galaxy:\n    bootstrap_admin_api_key: {{ item.bootstrap_key }}/' /galaxy/server/config/galaxy.yml 
