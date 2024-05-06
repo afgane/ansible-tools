@@ -3,8 +3,8 @@
 - name: Create/invoke script virtualenv (Tools)
   pip:
     name:
-      - ephemeris==0.8.0  # Pinned version should make sure ephemeris version matches what the role has been tested with
-      - bioblend==0.10.0
+      - ephemeris~={{ galaxy_tools_ephemeris_version }}  # Pinned version should make sure ephemeris version matches what the role has been tested with
+      - bioblend~={{ galaxy_tools_bioblend_verison }}
     state: present
     virtualenv: "{{ galaxy_tools_base_dir }}/venv"
     virtualenv_command: "{{ pip_virtualenv_command | default( 'virtualenv' ) }}"

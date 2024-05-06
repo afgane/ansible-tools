@@ -6,6 +6,9 @@ galaxy_tools_install_workflows: no
 galaxy_tools_create_bootstrap_user: no
 galaxy_tools_delete_bootstrap_user: no
 
+galaxy_tools_bioblend_version: 1.2
+galaxy_tools_ephemeris_version: 0.10
+
 # If enabled, the restart handler will attempt to restart Galaxy after tool
 # installation, assuming Galaxy is controlled by run.sh, docker or supervisor.
 galaxy_restart_handler_enabled: no

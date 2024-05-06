@@ -4,7 +4,7 @@
   pip:
     name:
       - pyyaml
-      - bioblend
+      - bioblend~={{ galaxy_tools_bioblend_version }}
     state: present
     virtualenv: "{{ galaxy_tools_base_dir }}/venv"
     virtualenv_command: "{{ pip_virtualenv_command | default( 'virtualenv' ) }}"
