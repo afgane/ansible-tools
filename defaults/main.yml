@@ -3,9 +3,6 @@
 galaxy_tools_install_tools: yes
 galaxy_tools_install_data_managers: no 
 galaxy_tools_install_workflows: no
-galaxy_tools_create_bootstrap_user: no
-galaxy_tools_delete_bootstrap_user: no
-
 galaxy_tools_bioblend_version: 1.2
 galaxy_tools_ephemeris_version: 0.10
 
@@ -42,19 +39,6 @@ galaxy_tools_api_key: ''
 #   - sample-workflow.ga
 
 galaxy_tools_workflows: []
-
-## Variables below are used only if the galaxy_install_bootstrap_user var is set
-
-# A user for the Galaxy bootstrap user
-galaxy_tools_admin_user: cloud@galaxyproject.org
-galaxy_tools_admin_username: cloud
-
-# Name of Galaxy's PID file
-galaxy_tools_pid_file_name: main.pid
-
-# Name of Galaxy's log file
-galaxy_tools_log_file_name: main.log
-
 
 ## Below variable names are used in several other roles that compose Galaxy's
 ## playbooks and are hence scoped differently

@@ -4,11 +4,6 @@
     msg: "Installed ansible version {{ ansible_version.full }}, but ansible version > 2.1.1.1 required"
   when: ansible_version.full is version('2.1.1.1', '<')
 
-- include_tasks: "bootstrap_user.yml"
-  vars:
-    create_user: "{{ galaxy_tools_create_bootstrap_user }}"
-  when: galaxy_tools_create_bootstrap_user and (not galaxy_tools_api_key or galaxy_tools_admin_user_preset_api_key)
-
 - include_tasks: tools.yml
   when: galaxy_tools_install_tools
 
@@ -17,8 +12,3 @@
 
 - include_tasks: workflows.yml
   when: galaxy_tools_install_workflows
-
-- include_tasks: "bootstrap_user.yml"
-  vars:
-    delete_user: "{{ galaxy_tools_delete_bootstrap_user }}"
-  when: galaxy_tools_delete_bootstrap_user
