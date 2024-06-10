@@ -8,7 +8,7 @@
   ansible.builtin.command: >
     {{ galaxy_tools_venv_dir }}/bin/shed-tools install
     -y "{{ item | to_nice_yaml }}"
-    -a "{{ galaxy_tools_tool_api_key }}"
+    -a "{{ galaxy_tools_api_key }}"
     -g "{{ galaxy_tools_galaxy_instance_url }}"
   when: _galaxy_tools_tool_list_tool.tools is defined
   register: _install_result

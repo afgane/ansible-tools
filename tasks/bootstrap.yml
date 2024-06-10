@@ -1,0 +1,27 @@
+---
+- name: Copy the user management script
+  ansible.builtin.copy:
+    src: manage_bootstrap_user.py
+    dest: "{{ galaxy_tools_base_dir }}/manage_bootstrap_user.py"
+    owner: "{{ galaxy_user }}"
+    group: "{{ galaxy_user }}"
+    mode: "750"
+
+- name: Create bootstrap user and api key
+  ansible.builtin.command: >
+    {{ galaxy_tools_base_dir }}/manage_bootstrap_user.py
+    -a {{ galaxy_tools_api_key }}
+    -g {{ galaxy_tools_galaxy_instance_url }}
+    -e {{ galaxy_bootstrap_user_email }}
+    {% if galaxy.galaxy_bootstrap_user_remote %}
+    -r
+    {% else %}
+    -u {{ galaxy_bootstrap_user_username }}
+    -p {{ lookup('ansible.builtin.password', '/dev/null', chars=['ascii_lowercase', 'digits'], length=50) }}
+    {% endif %}
+  register: _galaxy_create_bootstrap_user
+  tags: molecule-idempotence-notest
+
+- name: Set API key to use for workflows
+  ansible.builtin.set_fact:
+    galaxy_tools_bootstrap_user_api_key: _galaxy_create_bootstrap_user.stdout

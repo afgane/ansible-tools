@@ -1,13 +1,16 @@
 ---
-
 - name: Create/invoke script virtualenv (Workflows)
-  pip:
+  ansible.builtin.pip:
     name:
       - pyyaml
       - bioblend~={{ galaxy_tools_bioblend_version }}
     state: present
     virtualenv: "{{ galaxy_tools_venv_dir }}"
     virtualenv_command: "{{ pip_virtualenv_command | default( 'virtualenv' ) }}"
+
+- name: Create bootstrap user
+  when: galaxy_create_bootstrap_user
+  ansible.builtin.include_tasks: bootstrap.yml
 
 - name: Place the tool management script
   ansible.builtin.copy: 
@@ -25,7 +28,7 @@
   ansible.builtin.command: >
     {{ galaxy_tools_venv_dir }}/bin/python install_workflow.py
     -w '{{ item | basename }}'
-    -a {{ galaxy_tools_workflow_api_key }}
+    -a {{ galaxy_tools_bootstrap_user_api_key | default(galaxy_tools_workflow_api_key) }}
     -g {{ galaxy_tools_galaxy_instance_url }}
     {% if galaxy_tools_galaxy_publish_workflows %}
     -p
@@ -42,3 +45,13 @@
   ansible.builtin.file:
     dest: "{{ galaxy_tools_base_dir }}/install_workflow.py"
     state: absent
+
+- name: Delete the bootstrapped admin user
+  when: galaxy_create_bootstrap_user and galaxy_delete_bootstrap_user
+  ansible.builtin.command:
+    cmd: >
+      {{ galaxy_tools_base_dir }}/manage_bootstrap_user.py
+      -d
+      -a {{ galaxy_tools_api_key }}
+      -g {{ galaxy_tools_galaxy_instance_url }}
+      -e {{ galaxy_bootstrap_user_email }}

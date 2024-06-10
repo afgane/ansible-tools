@@ -61,3 +61,13 @@ galaxy_config_file: "{{ galaxy_server_dir }}/config/galaxy.ini"
 galaxy_runs_in_docker: no
 # galaxy_docker_container_id is either the container id or name shown by `docker ps`
 galaxy_docker_container_id: galaxy
+
+# galaxy_create_bootstrap_user can be set to true to create a new admin user.
+# This is necessary when the main api key is derived from the `bootstrap_admin_api_key` option in galaxy.yml
+# Such a bootstrap admin key allows installing tools and creating users, but not installing workflows (which are tied to a specific user).
+# galaxy_create_bootstrap_user will use the bootstrap key to create an admin user, and use the api key for that user to install workflows.
+galaxy_create_bootstrap_user: false
+galaxy_delete_bootstrap_user: true # whether to delete the user after workflows are installed
+galaxy_bootstrap_user_remote: false # set to true when the galaxy instance uses remote users (with an external authentication mechanism)
+galaxy_bootstrap_user_email: bootstrap_admin@galaxy
+galaxy_bootstrap_user_username: bootstrap_admin
