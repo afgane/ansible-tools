@@ -1,14 +1,14 @@
 ---
 
-galaxy_tools_install_tools: yes
-galaxy_tools_install_data_managers: no 
-galaxy_tools_install_workflows: no
+galaxy_tools_install_tools: true
+galaxy_tools_install_data_managers: false 
+galaxy_tools_install_workflows: false
 galaxy_tools_bioblend_version: 1.3
 galaxy_tools_ephemeris_version: 0.10
 
 # If enabled, the restart handler will attempt to restart Galaxy after tool
 # installation, assuming Galaxy is controlled by run.sh, docker or supervisor.
-galaxy_restart_handler_enabled: no
+galaxy_restart_handler_enabled: false
 
 # A URL or an IP address for the Galaxy instance where the tools are to be
 # installed
@@ -56,7 +56,7 @@ galaxy_server_dir: /srv/galaxy/
 galaxy_config_file: "{{ galaxy_server_dir }}/config/galaxy.ini"
 
 ## Set this to 'yes' if you are targeting galaxy in a docker container
-galaxy_runs_in_docker: no
+galaxy_runs_in_docker: false
 # galaxy_docker_container_id is either the container id or name shown by `docker ps`
 galaxy_docker_container_id: galaxy
 

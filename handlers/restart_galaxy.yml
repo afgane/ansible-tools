@@ -3,8 +3,8 @@
 - name: Check if Galaxy is managed by supervisor
   supervisorctl: name="galaxy:" state=present
   register: supervisor_galaxy
-  ignore_errors: yes
-  become: yes
+  ignore_errors: true
+  become: true
   become_user: root
 
 # All of the following includes are in the tasks folder
