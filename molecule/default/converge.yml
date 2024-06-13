@@ -16,9 +16,11 @@
         galaxy_tools_venv_dir: /galaxy/server/.venv
         galaxy_tools_install_tools: true
         galaxy_tools_install_workflows: true
+        galaxy_tools_install_data_managers: true
         galaxy_tools_galaxy_instance_url: http://localhost:8080
         galaxy_tools_tool_list_files: ../_testfiles/tool_list.yaml.sample
         galaxy_tools_workflows: ../_testfiles/sample-workflow.ga
+        galaxy_tools_data_managers_list: ../_testfiles/run_data_managers.yaml
         galaxy_tools_ignore_errors: false
         galaxy_create_bootstrap_user: true
         galaxy_delete_bootstrap_user: false

@@ -12,11 +12,10 @@
 - name: Copy galaxy_tools_data_managers_list in venv
   ansible.builtin.copy:
     src: "{{ galaxy_tools_data_managers_list }}"
-    dest: "{{ galaxy_tools_venv_dir }}/bin/data_managers_list.yaml"
+    dest: "{{ galaxy_tools_base_dir }}/data_managers_list.yaml"
 
 - name: Install Data-managers and Genomes
-  ansible.builtin.command: '{{ galaxy_tools_venv_dir }}/bin/run-data-managers -a "{{ galaxy_tools_api_key }}" -g "{{ galaxy_tools_galaxy_instance_url }}" --config "{{ galaxy_tools_venv_dir }}/bin/data_managers_list.yaml" '
-  register: install_result
+  ansible.builtin.command: '{{ galaxy_tools_venv_dir }}/bin/run-data-managers -a "{{ galaxy_tools_api_key }}" -g "{{ galaxy_tools_galaxy_instance_url }}" --config "{{ galaxy_tools_base_dir }}/data_managers_list.yaml" '
   changed_when: "install_result.stderr.find('Failed jobs: 0') != -1"
   failed_when: "(install_result.stderr.find('Tool not found or not accessible') != -1) or not(install_result.stderr.find('Failed jobs: 0') != -1) or (install_result.rc != 0)"
   ignore_errors: "{{ galaxy_tools_ignore_errors }}"
@@ -30,5 +29,5 @@
 - name: Display data_managers results
   debug:
     msg:
-      - "{{ install_result.stderr }}"
-      - "{{ install_result.stdout }}"
+      - "{{ _install_result.stderr }}"
+      - "{{ _install_result.stdout }}"
