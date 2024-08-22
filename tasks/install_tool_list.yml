@@ -1,3 +1,4 @@
+---
 # set outer loop's filename as a fact
 - name: Get tool list
   ansible.builtin.include_vars:

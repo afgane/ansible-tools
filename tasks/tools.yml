@@ -1,5 +1,4 @@
 ---
-
 - name: Create/invoke script virtualenv (Tools)
   ansible.builtin.pip:
     name: # Pinned version should make sure ephemeris version matches what the role has been tested with
@@ -7,9 +6,10 @@
       - bioblend~={{ galaxy_tools_bioblend_version }}
     state: present
     virtualenv: "{{ galaxy_tools_venv_dir }}"
-    virtualenv_command: "{{ pip_virtualenv_command | default( 'virtualenv' ) }}"
+    virtualenv_command: "{{ pip_virtualenv_command | default('virtualenv') }}"
 
-- ansible.builtin.include_tasks: install_tool_list.yml
-  with_items: '{{ galaxy_tools_tool_list_files }}'
+- name: Execute tool installation for each tool list file
+  ansible.builtin.include_tasks: install_tool_list.yml
+  with_items: "{{ galaxy_tools_tool_list_files }}"
   loop_control:
     loop_var: galaxy_tools_tool_list_file

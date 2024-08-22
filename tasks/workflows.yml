@@ -6,17 +6,19 @@
       - bioblend~={{ galaxy_tools_bioblend_version }}
     state: present
     virtualenv: "{{ galaxy_tools_venv_dir }}"
-    virtualenv_command: "{{ pip_virtualenv_command | default( 'virtualenv' ) }}"
+    virtualenv_command: "{{ pip_virtualenv_command | default('virtualenv') }}"
 
 - name: Place the tool management script
-  ansible.builtin.copy: 
+  ansible.builtin.copy:
     src: install_workflow.py
     dest: "{{ galaxy_tools_base_dir }}/install_workflow.py"
+    mode: "0700"
 
 - name: Copy workflows
   ansible.builtin.copy:
     src: "{{ item }}"
     dest: "{{ galaxy_tools_base_dir }}/{{ item | basename }}"
+    mode: "0640"
   with_items:
     - "{{ galaxy_tools_workflows }}"
 

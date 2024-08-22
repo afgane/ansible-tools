@@ -1,7 +1,7 @@
 ---
 - name: Check that an admin email has been set
   ansible.builtin.fail:
-    msg: "No email for an admin user set. To run data managers, either set galaxy_tools_admin_user_email or enable galaxy_tools_create_bootstrap_user."
+    msg: No email for an admin user set. To run data managers, either set galaxy_tools_admin_user_email or enable galaxy_tools_create_bootstrap_user.
   when: not galaxy_tools_admin_user_email
 
 - name: Create/invoke script virtualenv (Data managers)
@@ -11,12 +11,13 @@
       - bioblend~={{ galaxy_tools_bioblend_version }}
     state: present
     virtualenv: "{{ galaxy_tools_venv_dir }}"
-    virtualenv_command: "{{ pip_virtualenv_command | default( 'virtualenv' ) }}"
+    virtualenv_command: "{{ pip_virtualenv_command | default('virtualenv') }}"
 
 - name: Copy galaxy_tools_data_managers
   ansible.builtin.copy:
     src: "{{ galaxy_tools_data_managers }}"
     dest: "{{ galaxy_tools_base_dir }}/data_managers_list.yaml"
+    mode: "0644"
 
 - name: Install Data-managers and Genomes
   ansible.builtin.command: >
@@ -38,7 +39,7 @@
     - ansible-galaxy-tools restart galaxy
 
 - name: Display data_managers results
-  debug:
+  ansible.builtin.debug:
     msg:
       - "{{ _install_result.stderr }}"
       - "{{ _install_result.stdout }}"

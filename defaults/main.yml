@@ -1,7 +1,7 @@
 ---
 
 galaxy_tools_install_tools: true
-galaxy_tools_install_data_managers: false 
+galaxy_tools_install_data_managers: false
 galaxy_tools_install_workflows: false
 galaxy_tools_bioblend_version: 1.3
 galaxy_tools_ephemeris_version: 0.10
@@ -16,10 +16,7 @@ galaxy_tools_galaxy_instance_url: http://127.0.0.1:8080
 
 # A list of yml files that list the tools to be installed. See `files/tool_list.yaml.sample`
 # file for more about the format requirements of this file. The file names must be unique.
-galaxy_tools_tool_list_files: [ "tool_list.yaml" ]
-
-
-
+galaxy_tools_tool_list_files: [tool_list.yaml]
 # should the playbook continue when errors are found
 galaxy_tools_ignore_errors: true
 
@@ -30,14 +27,13 @@ galaxy_tools_base_dir: /tmp
 galaxy_tools_venv_dir: "{{ galaxy_tools_base_dir }}/venv"
 
 # Blank variable to make sure it's defined
-galaxy_tools_api_key: ''
+galaxy_tools_api_key: ""
 
 # List of workflow files to be installed. List the path to the workflows, e.g.:
 # galaxy_tools_workflows:
 #   - sample-workflow.ga
 
 galaxy_tools_workflows: []
-
 # Whether to publish added workflows
 galaxy_tools_galaxy_publish_workflows: true
 
@@ -72,4 +68,4 @@ galaxy_tools_bootstrap_user_remote: false # set to true when the galaxy instance
 galaxy_tools_bootstrap_user_email: bootstrap_admin@galaxy
 galaxy_tools_bootstrap_user_username: bootstrap_admin
 
-galaxy_tools_admin_user_email: ''
+galaxy_tools_admin_user_email: ""

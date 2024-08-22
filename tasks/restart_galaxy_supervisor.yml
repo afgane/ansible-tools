@@ -1,8 +1,11 @@
+---
 - name: Restart Galaxy
-  supervisorctl: name="galaxy:" state=restarted
+  community.general.supervisorctl:
+    name: '"galaxy:"'
+    state: restarted
   ignore_errors: true
   become: true
   become_user: root
 
-- pause:
+- ansible.builtin.pause:
     seconds: 5

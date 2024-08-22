@@ -1,3 +1,4 @@
+---
 - name: Restart Galaxy in docker container
-  command: "docker exec {{ galaxy_tools_galaxy_docker_container_id }} supervisorctl restart galaxy:"
+  ansible.builtin.command: "docker exec {{ galaxy_tools_galaxy_docker_container_id }} supervisorctl restart galaxy:"
   ignore_errors: true

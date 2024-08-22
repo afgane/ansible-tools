@@ -1,12 +1,12 @@
 ---
 - name: Check ansible version
   ansible.builtin.fail:
-    msg: "Installed ansible version {{ ansible_version.full }}, but ansible version > 2.1.1.1 required"
+    msg: Installed ansible version {{ ansible_version.full }}, but ansible version > 2.1.1.1 required
   when: ansible_version.full is version('2.9', '<')
 
 - name: Check there is a valid way of acquiring an API key
   ansible.builtin.fail:
-    msg: "No API key for a Galaxy admin, or a boostrapping API key, was provided. Please see the docs for this role"
+    msg: No API key for a Galaxy admin, or a boostrapping API key, was provided. Please see the docs for this role
   when: not galaxy_tools_api_key
 
 - name: Create bootstrap user
@@ -18,13 +18,16 @@
     galaxy_tools_ops_key: "{{ galaxy_tools_api_key }}"
   when: galaxy_tools_ops_key is not defined # if it is defined by bootstrap.yml, do not set this.
 
-- include_tasks: tools.yml
+- name: Include tool installation tasks
+  ansible.builtin.include_tasks: tools.yml
   when: galaxy_tools_install_tools
 
-- include_tasks: data_managers.yml
+- name: Include data manager tasks
+  ansible.builtin.include_tasks: data_managers.yml
   when: galaxy_tools_install_data_managers
 
-- include_tasks: workflows.yml
+- name: Include workflow installation tasks
+  ansible.builtin.include_tasks: workflows.yml
   when: galaxy_tools_install_workflows
 
 - name: Delete the bootstrapped admin user

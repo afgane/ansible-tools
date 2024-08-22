@@ -1,7 +1,8 @@
 ---
-
 - name: Check if Galaxy is managed by supervisor
-  supervisorctl: name="galaxy:" state=present
+  community.general.supervisorctl:
+    name: '"galaxy:"'
+    state: present
   register: supervisor_galaxy
   ignore_errors: true
   become: true
@@ -10,13 +11,13 @@
 # All of the following includes are in the tasks folder
 
 - name: Restart Galaxy (in docker container)
-  include_tasks: restart_galaxy_docker.yml
+  ansible.builtin.include_tasks: restart_galaxy_docker.yml
   when: galaxy_tools_galaxy_runs_in_docker|bool
 
 - name: Restart Galaxy (run.sh method)
-  include_tasks: restart_galaxy_run_sh.yml
+  ansible.builtin.include_tasks: restart_galaxy_run_sh.yml
   when: (supervisor_galaxy.failed is defined) and not (galaxy_tools_galaxy_runs_in_docker|bool)
 
 - name: Restart Galaxy (supervisor method)
-  include_tasks: restart_galaxy_supervisor.yml
+  ansible.builtin.include_tasks: restart_galaxy_supervisor.yml
   when: (supervisor_galaxy.failed is undefined) and not (galaxy_tools_galaxy_runs_in_docker|bool)
