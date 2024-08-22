@@ -42,7 +42,7 @@ given part of the role should be executed:
  - `galaxy_tools_install_workflows`: (default: `false`) whether to run the
    workflow installation script
  - `galaxy_tools_delete_bootstrap_user`: (default: `false`) whether to
-   delete the created bootstrap Galaxy admin user after other tasks are completed.
+   delete the created bootstrap Galaxy admin user after other tasks are completed. See `galaxy_tools_create_bootstrap_user` above.
 
 ## Optional variables
 
@@ -57,3 +57,21 @@ The filenames set in these variables will be looked up by Ansible in the Ansible
 See the `molecule/_testfiles` directory for examples of each of these files.
 
 See `defaults/main.yml` for the available variables and their defaults.
+
+### Restarting Galaxy with a handler
+
+You can optionally set a handler that restarts Galaxy, that will be called after new tools or data managers have been installed/run. You need to define the handler yourself, and set the `galaxy_tools_restart_handler` variable to the handler's task name. For example:
+
+```
+roles:
+  - role: galaxy-tools
+    vars:
+      ...
+      galaxy_tools_restart_handler: restart-galaxy
+
+handlers:
+  - name: Restart-Galaxy
+    command: /path/to/galaxy/run.sh --pid-file=/path/to/pid --stop-daemon
+```
+
+...but of course you can also use e.g. `supervisorctl` or `systemd` to restart Galaxy.

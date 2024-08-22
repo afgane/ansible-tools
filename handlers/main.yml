@@ -1,4 +1,0 @@
----
-- name: Ansible-galaxy-tools restart galaxy
-  ansible.builtin.include_tasks: restart_galaxy.yml
-  when: galaxy_restart_handler_enabled|bool

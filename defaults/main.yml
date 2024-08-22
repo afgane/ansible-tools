@@ -6,9 +6,8 @@ galaxy_tools_install_workflows: false
 galaxy_tools_bioblend_version: 1.3
 galaxy_tools_ephemeris_version: 0.10
 
-# If enabled, the restart handler will attempt to restart Galaxy after tool
-# installation, assuming Galaxy is controlled by run.sh, docker or supervisor.
-galaxy_restart_handler_enabled: false
+# Pass in the name of your handler for restarting the Galaxy instance
+galaxy_tools_restart_handler: "{{ omit }}"
 
 # A URL or an IP address for the Galaxy instance where the tools are to be
 # installed

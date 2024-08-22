@@ -24,3 +24,8 @@
         galaxy_tools_create_bootstrap_user: true
         galaxy_tools_delete_bootstrap_user: false
         galaxy_tools_ignore_errors: false
+        galaxy_tools_restart_handler: restart-galaxy
+  handlers:
+    - name: restart-galaxy
+      ansible.builtin.debug:
+        msg: "Handler run"

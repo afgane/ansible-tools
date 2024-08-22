@@ -35,8 +35,7 @@
   retries: "{{ galaxy_tools_install_retries }}"
   delay: "{{ galaxy_tools_install_retry_delay }}"
   until: _install_result is not failed
-  notify:
-    - ansible-galaxy-tools restart galaxy
+  notify: "{{ galaxy_tools_restart_handler }}"
 
 - name: Display data_managers results
   ansible.builtin.debug:
