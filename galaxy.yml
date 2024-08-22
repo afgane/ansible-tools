@@ -1,0 +1,14 @@
+---
+namespace: galaxyproject
+name: galaxy-tools
+version: "0.1.0"
+readme: "README.md"
+authors:
+    - The Galaxy Project
+    - "Dawa Ometto (https://github.com/dometto)"
+    - "Utrecht University (research.engineering@uu.nl)"
+license:
+    - "MIT"
+tags:
+    - collection
+repository: "https://www.github.com/dometto/ansible-galaxy-tools"
