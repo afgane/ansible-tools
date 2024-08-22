@@ -1,0 +1,4 @@
+# These will be automatically updated by dependabot
+# When ephemeris and bioblend updates are detected, update the default versions in defaults/main.yml!
+ephemeris~=0.10
+bioblend~=1.3
